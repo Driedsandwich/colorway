@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Sign in · ColorWay</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body data-page="login">
+  <main class="login-shell">
+    <div class="wordmark">ColorWay <span>one color, your whole look</span></div>
+    <section class="panel login-panel" aria-labelledby="login-title">
+      <p class="eyebrow">For judges and testers</p>
+      <h1 id="login-title">Sign in to ColorWay</h1>
+      <p>Enter the passcode from the testing instructions. Then pick one color and see it on your nails, lips, hair and outfit.</p>
+      <form id="login-form">
+        <label for="passcode">App passcode</label>
+        <input id="passcode" name="passcode" type="password" autocomplete="current-password" required autofocus>
+        <button type="submit">Sign in</button>
+        <p id="login-status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <p class="fine-print">Built with YouCam APIs for the YouCam API Skin AI &amp; eCommerce VTO Hackathon.</p>
+  </main>
+</body>
+</html>

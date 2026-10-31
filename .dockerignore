@@ -1,0 +1,12 @@
+.git
+.gitignore
+.env
+.env.*
+.test-work/
+data/
+node_modules/
+test/
+tools/
+*.md
+Dockerfile
+.dockerignore

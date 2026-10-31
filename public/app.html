@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>YouCam developer test</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body data-page="app">
+  <div class="workspace">
+    <header class="page-header">
+      <div>
+        <div class="wordmark">YouCam <span>developer test</span></div>
+        <h1>Photo in. Stored result out.</h1>
+        <p>Test the shared upload, task, and result flow before choosing a product idea.</p>
+      </div>
+      <span id="mode-badge" class="badge">Loading mode…</span>
+    </header>
+
+    <p id="mode-note" class="notice" role="status" aria-live="polite">Connecting to the app…</p>
+
+    <div class="work-grid">
+      <section class="panel" aria-labelledby="setup-title">
+        <div class="section-heading"><span class="step">1</span><h2 id="setup-title">Prepare a test</h2></div>
+        <form id="task-form">
+          <fieldset id="task-controls" disabled>
+            <legend class="sr-only">Photo and feature settings</legend>
+            <label for="photo">Upload or capture a photo</label>
+            <input id="photo" type="file" accept="image/jpeg,image/png" capture="user" aria-describedby="photo-help">
+            <p id="photo-help" class="help">JPEG or PNG, up to 10 MB. Choose a clear photo of the hair or hand you want to test.</p>
+            <details class="camera-option">
+              <summary>Use the rear camera for a hand photo</summary>
+              <label for="hand-photo" class="sr-only">Capture a hand photo with the rear camera</label>
+              <input id="hand-photo" type="file" accept="image/jpeg,image/png" capture="environment">
+            </details>
+            <p id="file-summary" class="help">No photo selected.</p>
+            <img id="photo-preview" class="photo-preview" alt="Selected photo preview" hidden>
+
+            <label for="feature">Feature</label>
+            <select id="feature" aria-describedby="feature-note" required></select>
+            <p id="feature-note" class="help"></p>
+            <details class="feature-catalog">
+              <summary>Feature availability and verification</summary>
+              <ul id="feature-catalog"></ul>
+            </details>
+
+            <fieldset id="hair-options" class="options">
+              <legend>Hair color · ombre</legend>
+              <div class="color-grid">
+                <label>First hex color
+                  <input name="hair-first" type="text" value="#6B3425" pattern="#[0-9a-fA-F]{6}" maxlength="7" spellcheck="false" autocomplete="off" required>
+                </label>
+                <label>Second hex color
+                  <input name="hair-second" type="text" value="#C99362" pattern="#[0-9a-fA-F]{6}" maxlength="7" spellcheck="false" autocomplete="off" required>
+                </label>
+              </div>
+              <label for="ombre-offset">Ombre line offset</label>
+              <input id="ombre-offset" name="ombre-offset" type="number" value="0" min="-0.99" max="0.99" step="0.01" required>
+              <p class="help">Vertical offset from −0.99 to 0.99. Use 0 to start.</p>
+            </fieldset>
+
+            <fieldset id="nail-options" class="options" hidden disabled>
+              <legend>Nail color · hex per finger</legend>
+              <p class="help">Use a six-digit hex color such as #BC334B.</p>
+              <div class="color-grid nail-grid">
+                <label>Thumb <input name="nail-thumb" type="text" value="#BC334B" pattern="#[0-9a-fA-F]{6}" maxlength="7" spellcheck="false" autocomplete="off" required></label>
+                <label>Index <input name="nail-index" type="text" value="#BC334B" pattern="#[0-9a-fA-F]{6}" maxlength="7" spellcheck="false" autocomplete="off" required></label>
+                <label>Middle <input name="nail-middle" type="text" value="#BC334B" pattern="#[0-9a-fA-F]{6}" maxlength="7" spellcheck="false" autocomplete="off" required></label>
+                <label>Ring <input name="nail-ring" type="text" value="#BC334B" pattern="#[0-9a-fA-F]{6}" maxlength="7" spellcheck="false" autocomplete="off" required></label>
+                <label>Little <input name="nail-little" type="text" value="#BC334B" pattern="#[0-9a-fA-F]{6}" maxlength="7" spellcheck="false" autocomplete="off" required></label>
+              </div>
+            </fieldset>
+            <button id="run-button" type="submit">Run test</button>
+          </fieldset>
+          <p id="task-status" class="status" role="status" aria-live="polite">Choose a photo to begin.</p>
+        </form>
+      </section>
+
+      <section class="panel result-panel" aria-labelledby="result-title">
+        <div class="section-heading"><span class="step">2</span><h2 id="result-title">Review the stored result</h2></div>
+        <div id="result-empty" class="empty-state">
+          <span class="empty-mark" aria-hidden="true">↳</span>
+          <p>Your result will appear here.</p>
+          <p class="help">The app stores task output before displaying it.</p>
+        </div>
+        <progress id="task-progress" aria-label="Task progress" max="100" hidden></progress>
+        <p id="task-detail" class="task-detail"></p>
+        <div id="results" class="results"></div>
+      </section>
+    </div>
+
+    <section class="usage-strip" aria-labelledby="usage-title">
+      <div><h2 id="usage-title">Live usage</h2><p id="usage-summary" class="help" aria-live="polite">Loading usage…</p></div>
+      <button id="refresh-usage" class="secondary" type="button">Refresh usage</button>
+    </section>
+    <footer>Shared foundation · No daily or per-user usage cap. Up to four tasks run at once; additional tasks wait.</footer>
+  </div>
+</body>
+</html>

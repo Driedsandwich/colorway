@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ColorWay · One color. Your whole look.</title>
+  <link rel="stylesheet" href="/colorway.css">
+  <script type="module" src="/colorway.js"></script>
+</head>
+<body data-page="colorway">
+  <a class="skip-link" href="#step-color">Skip to the color picker</a>
+
+  <header class="topbar">
+    <div class="topbar-row">
+      <div class="brand"><span class="brand-dot" aria-hidden="true"></span>ColorWay</div>
+      <span id="mode-badge" class="badge">Loading mode…</span>
+    </div>
+    <nav class="steps" aria-label="ColorWay steps">
+      <ol>
+        <li><a href="#step-color" data-step="step-color"><span class="step-num">1</span><span class="step-name">Color</span></a></li>
+        <li><a href="#step-photos" data-step="step-photos"><span class="step-num">2</span><span class="step-name">Photos</span></a></li>
+        <li><a href="#step-garment" data-step="step-garment"><span class="step-num">3</span><span class="step-name">Garment</span></a></li>
+        <li><a href="#step-generate" data-step="step-generate"><span class="step-num">4</span><span class="step-name">Generate</span></a></li>
+        <li><a href="#step-board" data-step="step-board"><span class="step-num">5</span><span class="step-name">Board</span></a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Virtual Try-On, all in one</p>
+      <h1 id="hero-title">One color.<br><span class="hero-accent">Your whole look.</span></h1>
+      <p class="lede">Pick a single color — a team’s game-day shade, a wedding palette, a concert or brand color — and see it on your nails, lips, hair and outfit at once. ColorWay measures how close each result really is and can re-render to match better.</p>
+    </section>
+
+    <p id="status" class="status-line" role="status" aria-live="polite">Pick a color to begin.</p>
+
+    <!-- Step 1 -->
+    <section id="step-color" class="card" aria-labelledby="color-title">
+      <div class="card-head"><span class="badge-num">1</span><h2 id="color-title">Pick your color</h2></div>
+      <div class="color-layout">
+        <div class="color-hero">
+          <div id="color-swatch" class="big-swatch" role="img" aria-label="Selected color #C8102E"></div>
+          <p id="color-name" class="color-name">Game Day Red</p>
+        </div>
+        <div class="color-controls">
+          <div class="field-row">
+            <div class="field">
+              <label for="color-picker">Color</label>
+              <input id="color-picker" class="color-input" type="color" value="#c8102e">
+            </div>
+            <div class="field grow">
+              <label for="hex-input">Hex code</label>
+              <input id="hex-input" class="hex-input" type="text" value="#C8102E" maxlength="7" spellcheck="false" autocomplete="off" inputmode="text" aria-describedby="hex-help">
+            </div>
+          </div>
+          <p id="hex-help" class="help">Six digits, like #C8102E.</p>
+
+          <p class="mini-label" id="preset-label">Presets</p>
+          <div class="chips" role="group" aria-labelledby="preset-label" id="presets"></div>
+
+          <div class="pick-photo">
+            <p class="mini-label">Pick from a photo</p>
+            <label class="file-button" for="inspiration-input">Choose an inspiration photo</label>
+            <input id="inspiration-input" class="visually-hidden-input" type="file" accept="image/jpeg,image/png,image/webp">
+            <p id="pick-help" class="help">Load any image, then tap or click a pixel. ColorWay averages a 5×5 area around it.</p>
+            <canvas id="pick-canvas" class="pick-canvas" width="300" height="200" tabindex="0" hidden aria-label="Inspiration photo for color picking" aria-describedby="pick-keys"></canvas>
+            <p id="pick-keys" class="help" hidden>Keyboard: arrow keys move the sampling point, Enter or Space samples it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section id="step-photos" class="card" aria-labelledby="photos-title">
+      <div class="card-head"><span class="badge-num">2</span><h2 id="photos-title">Add your photos</h2></div>
+      <p class="card-lede">Choose which surfaces to try. Photos are resized on your device (longest side 1000 px) before they upload.</p>
+      <div class="slots">
+        <article class="slot" data-slot="face" aria-labelledby="slot-face-title">
+          <h3 id="slot-face-title">Face</h3>
+          <p class="help">Front-facing, shoulders visible, no makeup needed. Used for lips and hair.</p>
+          <div class="thumb"><img id="thumb-face" alt="Face photo preview" hidden><span class="thumb-empty" id="empty-face">No photo yet</span></div>
+          <label class="file-button" for="face-input">Take or choose face photo</label>
+          <input id="face-input" class="visually-hidden-input" type="file" accept="image/jpeg,image/png">
+          <p id="note-face" class="slot-note" aria-live="polite"></p>
+          <div class="includes">
+            <label class="check"><input type="checkbox" id="inc-lip" checked><span>Lips</span></label>
+            <label class="check"><input type="checkbox" id="inc-hair" checked><span>Hair (ombre tips)</span></label>
+          </div>
+        </article>
+
+        <article class="slot" data-slot="hand" aria-labelledby="slot-hand-title">
+          <h3 id="slot-hand-title">Hand</h3>
+          <p class="help">Back of your hand, fingers apart, bare nails.</p>
+          <div class="thumb"><img id="thumb-hand" alt="Hand photo preview" hidden><span class="thumb-empty" id="empty-hand">No photo yet</span></div>
+          <label class="file-button" for="hand-input">Take or choose hand photo</label>
+          <input id="hand-input" class="visually-hidden-input" type="file" accept="image/jpeg,image/png">
+          <p id="note-hand" class="slot-note" aria-live="polite"></p>
+          <div class="includes">
+            <label class="check"><input type="checkbox" id="inc-nail" checked><span>Nails</span></label>
+          </div>
+        </article>
+
+        <article class="slot" data-slot="body" aria-labelledby="slot-body-title">
+          <h3 id="slot-body-title">Full body</h3>
+          <p class="help">Front view, standing, whole outfit in frame.</p>
+          <div class="thumb"><img id="thumb-body" alt="Full body photo preview" hidden><span class="thumb-empty" id="empty-body">No photo yet</span></div>
+          <label class="file-button" for="body-input">Take or choose full-body photo</label>
+          <input id="body-input" class="visually-hidden-input" type="file" accept="image/jpeg,image/png">
+          <p id="note-body" class="slot-note" aria-live="polite"></p>
+          <div class="includes">
+            <label class="check"><input type="checkbox" id="inc-outfit" checked><span>Outfit (needs the garment photo too)</span></label>
+          </div>
+        </article>
+
+        <article class="slot" data-slot="garment" aria-labelledby="slot-garment-title">
+          <h3 id="slot-garment-title">Garment</h3>
+          <p class="help">A plain top laid flat on a contrasting background. It is recolored on your device first.</p>
+          <div class="thumb"><img id="thumb-garment" alt="Garment photo preview" hidden><span class="thumb-empty" id="empty-garment">No photo yet</span></div>
+          <label class="file-button" for="garment-input">Take or choose garment photo</label>
+          <input id="garment-input" class="visually-hidden-input" type="file" accept="image/jpeg,image/png">
+          <p id="note-garment" class="slot-note" aria-live="polite"></p>
+          <div class="includes"><p class="help">Used for the Outfit surface.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section id="step-garment" class="card" aria-labelledby="garment-title">
+      <div class="card-head"><span class="badge-num">3</span><h2 id="garment-title">Garment recolor preview</h2></div>
+      <p id="garment-note" class="card-lede">Add a garment photo and a color to preview the recolored top. The recolored image is what gets uploaded.</p>
+      <div id="garment-compare" class="compare" hidden>
+        <figure class="compare-item">
+          <canvas id="garment-before" width="300" height="300" role="img" aria-label="Garment before recoloring"></canvas>
+          <figcaption>Before</figcaption>
+        </figure>
+        <figure class="compare-item">
+          <canvas id="garment-after" width="300" height="300" role="img" aria-label="Garment after recoloring"></canvas>
+          <figcaption id="garment-after-caption">After</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section id="step-generate" class="card" aria-labelledby="generate-title">
+      <div class="card-head"><span class="badge-num">4</span><h2 id="generate-title">Generate</h2></div>
+      <p id="plan-summary" class="card-lede">Nothing selected yet.</p>
+      <button id="generate-button" class="primary" type="button" disabled>Generate my ColorWay</button>
+      <ul id="progress-list" class="progress-list" aria-label="Progress per surface"></ul>
+      <p id="units-line" class="help" hidden></p>
+    </section>
+
+    <!-- Step 5 -->
+    <section id="step-board" class="card" aria-labelledby="board-title">
+      <div class="card-head"><span class="badge-num">5</span><h2 id="board-title">Your ColorWay board</h2></div>
+      <p id="board-empty" class="card-lede">Your results will appear here, each with a measured color match.</p>
+      <p id="demo-note" class="notice" hidden>Demo mode returns your uploaded photos unchanged, so scores describe the original photo and not a try-on.</p>
+      <div id="board-grid" class="board-grid"></div>
+      <p class="legend" id="board-legend" hidden>
+        <strong>How to read this.</strong> The swatches compare your target color with the average color measured on the result. ΔE is the CIEDE2000 color difference; below about 2–3 it is hard to see by eye. The 0–100 match score is ColorWay’s own scale (100 at ΔE 0, falling in a straight line to 0 at ΔE 30), not an industry standard.
+      </p>
+      <div class="board-actions" id="board-actions" hidden>
+        <button id="match-button" class="primary" type="button" disabled>Match better</button>
+        <button id="save-button" class="secondary" type="button" disabled>Save board as PNG</button>
+        <p id="match-note" class="help"></p>
+      </div>
+    </section>
+
+    <footer class="foot">ColorWay · results are stored by the app before they are shown. Your photos are resized in your browser first.</footer>
+  </main>
+</body>
+</html>
